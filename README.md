@@ -18,6 +18,6 @@ Now in command prompt enter:
 * To run the application [click here](https://github.com/agarwal-akash/Hospital-Management/blob/master/store/SCHEDULAR.jar) and use username:akash password:12345 to open the application.
 
 ## Licence [![AUR](https://img.shields.io/badge/License-GNU-blue.svg)](https://github.com/agarwal-akash/Hospital-Management/blob/master/LICENSE)
-Wakemeup is licenced under [MIT](https://github.com/agarwal-akash/Hospital-Management/blob/master/LICENSE).
+This application is licenced under [GNU](https://github.com/agarwal-akash/Hospital-Management/blob/master/LICENSE).
 
 Thank you. :bowtie:
