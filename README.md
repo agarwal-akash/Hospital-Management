@@ -1,4 +1,4 @@
-# Hospital Management System ![AUR](https://img.shields.io/badge/BUILT%20WITH-Netbeans-blue.svg) ![AUR](https://img.shields.io/badge/build-passing-brightgreen.svg)
+# Hospital Management System  ![AUR](https://img.shields.io/badge/build-passing-brightgreen.svg) ![AUR](https://img.shields.io/badge/BUILT%20WITH-Netbeans-blue.svg)
 A desktop application written in Java for a Hospital Management System. 
 A project made in class-12 (CBSE-Informatics and Practices). 
 * Provides password protected Admin panel.
@@ -15,7 +15,9 @@ Now in command prompt enter:
   
   This will complete the database transfer to your computer.
 * You will need to download [rs2xml.jar](https://www.google.co.in/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0ahUKEwi676Cwyq3RAhULpo8KHYGaA38QFggZMAA&url=https%3A%2F%2Fsourceforge.net%2Fprojects%2Ffinalangelsanddemons%2Ffiles%2Frs2xml.jar%2Fdownload&usg=AFQjCNEH-1KrnxdlWsolEwCvtsqfOajvKA&sig2=afKQGBOvrZ-e08uYpA5DRw) and add it to your libs in netbeans project.
-* To run the application [click here](https://github.com/agarwal-akash/Hospital-Management/blob/master/store/SCHEDULAR.jar) and use username:akash password:12345 to open the application.
+
+## Download
+* To run the application [click here](https://github.com/agarwal-akash/Hospital-Management/blob/master/Hospital%20Management.exe) and use username:akash password:12345 to open the application.
 
 ## Licence [![AUR](https://img.shields.io/badge/License-GNU-blue.svg)](https://github.com/agarwal-akash/Hospital-Management/blob/master/LICENSE)
 This application is licenced under [GNU](https://github.com/agarwal-akash/Hospital-Management/blob/master/LICENSE).
