@@ -4,6 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 
@@ -74,11 +80,11 @@ PreparedStatement pst=null;
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txtServiceName = new javax.swing.JTextField();
-        txtServiceDate = new javax.swing.JFormattedTextField();
         jLabel36 = new javax.swing.JLabel();
         txtPatientID = new javax.swing.JTextField();
         txtPatientName = new javax.swing.JTextField();
         txtServiceCharges = new javax.swing.JTextField();
+        txtServiceDate = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         txtNew = new javax.swing.JButton();
         txtSave = new javax.swing.JButton();
@@ -101,9 +107,13 @@ PreparedStatement pst=null;
 
         jLabel5.setText("Service Charges");
 
-        txtServiceDate.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
+        txtServiceName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtServiceNameActionPerformed(evt);
+            }
+        });
 
-        jLabel36.setText("(DD/MM/YYYY)");
+        jLabel36.setText("(YYYY-MM-DD)");
 
         txtPatientID.setEditable(false);
 
@@ -112,6 +122,12 @@ PreparedStatement pst=null;
         txtServiceCharges.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtServiceChargesKeyTyped(evt);
+            }
+        });
+
+        txtServiceDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtServiceDateActionPerformed(evt);
             }
         });
 
@@ -132,9 +148,9 @@ PreparedStatement pst=null;
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(txtServiceName)
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtPatientID, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                                .addComponent(txtServiceDate, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtPatientID, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                                .addComponent(txtServiceDate))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(jLabel36))
                         .addComponent(txtPatientName))
@@ -151,8 +167,8 @@ PreparedStatement pst=null;
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtServiceDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel36))
+                    .addComponent(jLabel36)
+                    .addComponent(txtServiceDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -352,11 +368,9 @@ PreparedStatement pst=null;
     private void txtUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUpdateActionPerformed
         try{
             con=Connect.ConnectDB();
-
-            String sql= "update Services set Servicename='"+ txtServiceName.getText() + "',ServiceDate='"+ txtServiceDate.getText() + "',PatientID='" + txtPatientID.getText() + "',ServiceCharges=" + txtServiceCharges.getText() + " where ServiceID=" + txtServiceID.getText() + "";
+            String sql= "update Services set ServiceName='" + txtServiceName.getText() +"',ServiceDate='" + txtServiceDate.getText()+ "',PatientID='" + txtPatientID.getText() + "',ServiceCharges='" + txtServiceCharges.getText() + "' where ServiceID='" + txtServiceID.getText() + "'";
             pst=con.prepareStatement(sql);
             pst.execute();
-
             JOptionPane.showMessageDialog(this,"Successfully updated");
             txtUpdate.setEnabled(false);
         }catch(HeadlessException | SQLException ex){
@@ -390,6 +404,14 @@ PreparedStatement pst=null;
             JOptionPane.showMessageDialog(this,ex);
         }
     }//GEN-LAST:event_tblPatientMouseClicked
+
+    private void txtServiceNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtServiceNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtServiceNameActionPerformed
+
+    private void txtServiceDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtServiceDateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtServiceDateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -444,7 +466,7 @@ PreparedStatement pst=null;
     public javax.swing.JTextField txtPatientName;
     public javax.swing.JButton txtSave;
     public javax.swing.JTextField txtServiceCharges;
-    public javax.swing.JFormattedTextField txtServiceDate;
+    public javax.swing.JTextField txtServiceDate;
     public static javax.swing.JTextField txtServiceID;
     public javax.swing.JTextField txtServiceName;
     public javax.swing.JButton txtUpdate;

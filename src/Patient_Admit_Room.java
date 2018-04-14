@@ -18,9 +18,9 @@ import net.proteanit.sql.DbUtils;
  * @author Agarwal
  */
 public class Patient_Admit_Room extends javax.swing.JFrame {
-Connection con=null;
-ResultSet rs=null;
-PreparedStatement pst=null;
+    Connection con=null;
+    ResultSet rs=null;
+    PreparedStatement pst=null;
     /**
      * Creates new form PatientAdmit_Room
      */
@@ -30,52 +30,47 @@ PreparedStatement pst=null;
         fillcombo();
         cmbRoomNo.setSelectedIndex(-1);
         cmbRoomNo1.setVisible(false);
-        txtAdmitID.setVisible(false);
          Get_Data1();
          GetRecord();
     }
-private void fillcombo()
-{
-     try{
-      
-   con=Connect.ConnectDB();
-      String sql= "select distinct RoomNo from Room order by RoomNo";
-      pst=con.prepareStatement(sql);
-      rs=pst.executeQuery();
-      while(rs.next()){
+private void fillcombo(){
+    
+    try{
+        con=Connect.ConnectDB();
+        String sql= "select distinct RoomNo from Room order by RoomNo";
+        pst=con.prepareStatement(sql);
+        rs=pst.executeQuery();
+        while(rs.next()){
           String add=rs.getString("RoomNo");
           cmbRoomNo.addItem(add);
-          
-         }
-        }catch(HeadlessException | SQLException ex){
+          }
+       }catch(HeadlessException | SQLException ex){
            JOptionPane.showMessageDialog(this,ex); 
-        }
+       }
 }
  private void GetRecord(){
-        String sql="select DoctorID as 'Doctor ID', DoctorName as 'Doctor Name' from Doctor order by DoctorName";  try{
-          con=Connect.ConnectDB();
-         pst=con.prepareStatement(sql);
-          rs= pst.executeQuery();
-         jTable2.setModel(DbUtils.resultSetToTableModel(rs));
-         }catch(Exception e){
+     String sql="select DoctorID as 'Doctor ID', DoctorName as 'Doctor Name' from Doctor order by DoctorName";  
+     try{
+        con=Connect.ConnectDB();
+        pst=con.prepareStatement(sql);
+        rs= pst.executeQuery();
+        jTable2.setModel(DbUtils.resultSetToTableModel(rs));
+     }catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
-          
-}
-    }
+     }
+ }
   private void Get_Data1(){
         String sql="select PatientID as 'Patient ID', PatientName as 'Patient Name',Gen as 'Gender',BG as 'Blood Group' from Patientregistration order by PatientName";
         try{
-         con=Connect.ConnectDB();
-         pst=con.prepareStatement(sql);
-          rs= pst.executeQuery();
-         jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+            con=Connect.ConnectDB();
+            pst=con.prepareStatement(sql);
+            rs= pst.executeQuery();
+            jTable1.setModel(DbUtils.resultSetToTableModel(rs));
          }catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
-          
-}
+         }
     }
-  private void Reset()
-{
+  private void Reset(){
     txtDoctorID.setText("");
     txtDoctorName.setText("");
     PatientID.setText("");
@@ -90,7 +85,7 @@ private void fillcombo()
     btnSave.setEnabled(true);
     btnUpdate.setEnabled(false);
     btnDelete.setEnabled(false);
-    }
+ }
     /**
      * Creates new form Patient_Admit_Room
      */
@@ -112,7 +107,6 @@ private void fillcombo()
         jLabel10 = new javax.swing.JLabel();
         PatientID = new javax.swing.JTextField();
         txtPatientName = new javax.swing.JTextField();
-        txtAdmitDate = new javax.swing.JFormattedTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         txtGender = new javax.swing.JTextField();
@@ -122,13 +116,13 @@ private void fillcombo()
         jLabel14 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        txtDisease = new javax.swing.JTextField();
         txtDoctorID = new javax.swing.JTextField();
         txtDoctorName = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtRemarks = new javax.swing.JTextArea();
         cmbRoomNo = new javax.swing.JComboBox();
         cmbRoomNo1 = new javax.swing.JComboBox();
+        txtAdmitDate = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -139,7 +133,7 @@ private void fillcombo()
         btnDelete = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnGetData = new javax.swing.JButton();
-        txtAdmitID = new javax.swing.JTextField();
+        txtDisease = new javax.swing.JTextField();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Patient Admit Info"));
 
@@ -155,11 +149,9 @@ private void fillcombo()
 
         txtPatientName.setEditable(false);
 
-        txtAdmitDate.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
-
         jLabel11.setText("Gender");
 
-        jLabel22.setText("(DD/MM/YYYY)");
+        jLabel22.setText("(YYYY-MM-DD)");
 
         txtGender.setEditable(false);
 
@@ -197,6 +189,12 @@ private void fillcombo()
 
         cmbRoomNo1.setEditable(true);
 
+        txtAdmitDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAdmitDateActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -225,7 +223,6 @@ private void fillcombo()
                     .addComponent(txtPatientName, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtBloodGroup)
                     .addComponent(txtGender)
-                    .addComponent(txtDisease)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(cmbRoomNo, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -254,14 +251,13 @@ private void fillcombo()
                     .addComponent(jLabel9)
                     .addComponent(txtBloodGroup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addComponent(jLabel12)
+                .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtDisease, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(txtAdmitDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel22))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel13)
+                        .addComponent(jLabel22))
+                    .addComponent(txtAdmitDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
@@ -387,8 +383,6 @@ private void fillcombo()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        txtAdmitID.setEditable(false);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -396,12 +390,15 @@ private void fillcombo()
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtAdmitID, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtDisease)
+                        .addGap(142, 142, 142)))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -409,20 +406,23 @@ private void fillcombo()
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(21, 21, 21)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtAdmitID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 30, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(192, 192, 192)
+                        .addComponent(txtDisease, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -546,7 +546,7 @@ private void fillcombo()
                 return;
             }
 
-            String sql= "insert into AdmitPatient_Room(PatientID,Disease,AdmitDate,RoomNo,DoctorID,AP_Remarks)values('"+ PatientID.getText() + "','"+ txtDisease.getText() + "','"+ txtAdmitDate.getText() + "','"+ cmbRoomNo.getSelectedItem()+ "','" + txtDoctorID.getText() + "','"+ txtRemarks.getText() + "')";
+            String sql= "insert into admitpatient_room(PatientID,Disease,AdmitDate,RoomNo,DoctorID,AP_Remarks)values('"+ PatientID.getText() + "','"+ txtDisease.getText() + "','"+ txtAdmitDate.getText() + "','"+ cmbRoomNo.getSelectedItem()+ "','" + txtDoctorID.getText() + "','"+ txtRemarks.getText() + "')";
 
             pst=con.prepareStatement(sql);
             pst.execute();
@@ -567,7 +567,7 @@ private void fillcombo()
             if (P==0)
             {
                 con=Connect.ConnectDB();
-                String sql= "delete from AdmitPatient_Room where AdmitID = " + txtAdmitID.getText() + "";
+                String sql= "delete from AdmitPatient_Room where PatientID = " + PatientID.getText() + "";
                 pst=con.prepareStatement(sql);
                 pst.execute();
                 JOptionPane.showMessageDialog(this,"Successfully deleted","Record",JOptionPane.INFORMATION_MESSAGE);
@@ -580,16 +580,14 @@ private void fillcombo()
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        
         try{
-
             con=Connect.ConnectDB();
-
             Statement stmt1;
             stmt1= con.createStatement();
             String s= cmbRoomNo.getSelectedItem().toString();
             String t= cmbRoomNo1.getSelectedItem().toString();
-            if (!t.equals(s))
-            {
+            if (!t.equals(s)){
                 String sql2="Select RoomNo from Room where RoomNo= '" + cmbRoomNo.getSelectedItem()+ "' and RoomStatus='Booked'";
                 rs=stmt1.executeQuery(sql2);
                 if(rs.next()){
@@ -600,19 +598,17 @@ private void fillcombo()
                 }
             }
 
-            String sql= " update AdmitPatient_Room set  PatientID='"+ PatientID.getText() + "',Disease='"+ txtDisease.getText() + "',AdmitDate='"+ txtAdmitDate.getText() + "',RoomNo='"+ cmbRoomNo.getSelectedItem()+ "',DoctorID='" + txtDoctorID.getText() + "',AP_Remarks='"+ txtRemarks.getText() + "' where AdmitID= " + txtAdmitID.getText() + "";
+            String sql= " update AdmitPatient_Room set  PatientID='"+ PatientID.getText() + "',Disease='"+ txtDisease.getText() + "',AdmitDate='"+ txtAdmitDate.getText() + "',RoomNo='"+ cmbRoomNo.getSelectedItem()+ "',DoctorID='" + txtDoctorID.getText() + "',AP_Remarks='"+ txtRemarks.getText() + "' where PatientID= " + PatientID.getText() + "";
             pst=con.prepareStatement(sql);
             pst.execute();
 
-            if (!t.equals(s))
-            {
+            if (!t.equals(s)){
                 String sql3= "update room set RoomStatus='Booked' where RoomNo='" + cmbRoomNo.getSelectedItem() + "'";
                 pst=con.prepareStatement(sql3);
                 pst.execute();
             }
 
-            if (!t.equals(s))
-            {
+            if (!t.equals(s)){
                 String sql4= "update room set RoomStatus='Vacant' where RoomNo='" + cmbRoomNo1.getSelectedItem() + "'";
                 pst=con.prepareStatement(sql4);
                 pst.execute();
@@ -630,6 +626,10 @@ private void fillcombo()
         Patient_Admit_roomRec1 frm= new Patient_Admit_roomRec1();
         frm.setVisible(true);
     }//GEN-LAST:event_btnGetDataActionPerformed
+
+    private void txtAdmitDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAdmitDateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAdmitDateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -693,8 +693,7 @@ private void fillcombo()
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    public javax.swing.JFormattedTextField txtAdmitDate;
-    public javax.swing.JTextField txtAdmitID;
+    public javax.swing.JTextField txtAdmitDate;
     public javax.swing.JTextField txtBloodGroup;
     public javax.swing.JTextField txtDisease;
     public javax.swing.JTextField txtDoctorID;

@@ -17,27 +17,28 @@ import net.proteanit.sql.DbUtils;
 public class ServicesRec extends javax.swing.JFrame {
 
    Connection con=null;
-ResultSet rs=null;
-PreparedStatement pst=null;
+    ResultSet rs=null;
+    PreparedStatement pst=null;
     /**
      * Creates new form ServicesRecord
      */
     public ServicesRec() {
         initComponents();
-         con= Connect.ConnectDB();
+        con= Connect.ConnectDB();
         Get_Data();
-        setLocationRelativeTo(null);
+        //setLocationRelativeTo(null);
     }
  private void Get_Data(){
        String sql="select ServiceID as 'Service ID', ServiceName as 'Service Name',ServiceDate as 'Service Date',PatientRegistration.PatientID as 'Patient ID',PatientName as 'Patient Name',ServiceCharges as 'Service Charges' from PatientRegistration,Services where Services.PatientID=PatientRegistration.PatientID order by PatientName";
        try{         
-           pst=con.prepareStatement(sql);
-          rs= pst.executeQuery();
-         txtTable.setModel(DbUtils.resultSetToTableModel(rs));
+            pst=con.prepareStatement(sql);
+            rs= pst.executeQuery();
+            txtTable.setModel(DbUtils.resultSetToTableModel(rs));
          }catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
-          
-                    }}      
+            e.printStackTrace();
+          }
+ }      
      /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -80,17 +81,11 @@ PreparedStatement pst=null;
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE)
         );
 
         pack();
@@ -102,10 +97,10 @@ PreparedStatement pst=null;
 
     private void txtTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTableMouseClicked
        try{
-            con=Connect.ConnectDB();
-            int row= txtTable.getSelectedRow();
-            String table_click= txtTable.getModel().getValueAt(row, 0).toString();
-           String sql=" Select * from PatientRegistration,Services where Services.PatientID=PatientRegistration.PatientID and ServiceID=" + table_click  + "";
+            con = Connect.ConnectDB();
+            int row = txtTable.getSelectedRow();
+            String table_click = txtTable.getModel().getValueAt(row, 0).toString();
+           String sql="Select * from PatientRegistration,Services where Services.PatientID=PatientRegistration.PatientID and ServiceID=" + table_click  + "";
             pst=con.prepareStatement(sql);
             rs=  pst.executeQuery();
             if(rs.next()){

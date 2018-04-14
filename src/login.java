@@ -95,33 +95,30 @@ public class login extends javax.swing.JFrame {
        Connection con=null;
        ResultSet rs=null;
        PreparedStatement pst=null;
-    if (txtUsername.getText().equals("")) {
+       if (txtUsername.getText().equals("")) {
            JOptionPane.showMessageDialog( this, "Please enter user name");
            return;
-            
-            }
+        }
     
         if (jPassword.getText().equals("")) {
            JOptionPane.showMessageDialog( this, "Please enter password");
            return;
           
             }
-     con=Connect.ConnectDB();
-      String sq1= "select * from users where user_name= '" + txtUsername.getText() + "' and password ='" + jPassword.getText() + "'";
-      try
-      {
-          pst=con.prepareStatement(sq1);
-          rs= pst.executeQuery();
-          if (rs.next()){
+        con=Connect.ConnectDB();
+        String sq1= "select * from users where user_name= '" + txtUsername.getText() + "' and password ='" + jPassword.getText() + "'";
+        try{
+            pst=con.prepareStatement(sq1);
+            rs= pst.executeQuery();
+            if (rs.next()){
              this.hide();
              Main frm=new Main();
              frm.setVisible(true);
+           }
+           else{
+              JOptionPane.showMessageDialog(null, "Login Failed..Try again !");
           }
-          else{
-              
-            JOptionPane.showMessageDialog(null, "Login Failed..Try again !");
-          }
-      }catch(SQLException | HeadlessException e){
+        }catch(SQLException | HeadlessException e){
          JOptionPane.showMessageDialog(null, e); 
                   // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed

@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
+import java.text.SimpleDateFormat;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -17,7 +19,7 @@ import javax.swing.JOptionPane;
  * @author Agarwal
  */
 public class Entry extends javax.swing.JFrame {
-    Connection con=null;
+Connection con=null;
 ResultSet rs=null;
 PreparedStatement pst=null;
 
@@ -113,7 +115,7 @@ private void reset()
 
         cmbB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-" }));
 
-        jLabel8.setText("DD/MM/YYYY");
+        jLabel8.setText("YYYY-MM-DD");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -153,7 +155,7 @@ private void reset()
                                 .addComponent(cmbG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel8)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -365,12 +367,12 @@ try{
                 JOptionPane.showMessageDialog( this, "Please enter joining date","Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-   Statement stmt;
-       stmt= con.createStatement();
-       String sql1="Select DoctorID from Doctor where DoctorID= '" + txtId.getText() + "'";
-      rs=stmt.executeQuery(sql1);
-      if(rs.next()){
-        JOptionPane.showMessageDialog( this, "Doctor ID already exists","Error", JOptionPane.ERROR_MESSAGE);
+        Statement stmt;
+        stmt= con.createStatement();
+        String sql1="Select DoctorID from Doctor where DoctorID= '" + txtId.getText() + "'";
+        rs=stmt.executeQuery(sql1);
+        if(rs.next()){
+            JOptionPane.showMessageDialog( this, "Doctor ID already exists","Error", JOptionPane.ERROR_MESSAGE);
         txtId.setText("");
        
        return;
@@ -388,22 +390,20 @@ try{
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-try{
+        try{
             con=Connect.ConnectDB();
-            String sql= "update Doctor set Doctorname='"+ txtName.getText() + "',FatherName='"+ txtFname.getText() + "',Email='"+ txtE.getText() + "',ContacNo='"+ txtC.getText() + "',Qualifications='"+ txtQ.getText() +  "',Gender='" + cmbG.getSelectedItem() + "',BloodGroup='"+ cmbB.getSelectedItem() + "',DateOfJoining='" + txtD.getText() + "',Address='" + txtAd.getText() + "' where DoctorID='" + txtD.getText() + "'";
-
-           pst=con.prepareStatement(sql);
+            String sql= "update Doctor set Doctorname='" + txtName.getText() + "',FatherName='" + txtFname.getText() + "',Email='" + txtE.getText() + "',ContacNo='"+ txtC.getText() + "',Qualifications='"+ txtQ.getText() +  "',Gender='" + cmbG.getSelectedItem() + "',BloodGroup='"+ cmbB.getSelectedItem() + "',DateOfJoining='" + txtD.getText() + "',Address='" + txtAd.getText() + "' where DoctorID='" + txtId.getText() + "'";
+            pst=con.prepareStatement(sql);
             pst.execute();
             JOptionPane.showMessageDialog(this,"Successfully updated");
             btnUpdate.setEnabled(false);
-
-        }catch(HeadlessException | SQLException ex){
+            }catch(HeadlessException | SQLException ex){
             JOptionPane.showMessageDialog(this,ex);
-        }        // TODO add your handling code here:
+            }        // TODO add your handling code here:
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnGetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetActionPerformed
- this.hide();
+     this.hide();
      DocRec frm=new DocRec();
      frm.setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_btnGetActionPerformed

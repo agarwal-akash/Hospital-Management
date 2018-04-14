@@ -26,8 +26,6 @@ PreparedStatement pst=null;
     public Patient_Discharge_room() {
         initComponents();
         setLocationRelativeTo(null);
-        txtDischargeID.setVisible(false);
-        txtAdmitID.setVisible(false);
     }
     /**
      * Creates new form Patient_Discharge_room
@@ -83,17 +81,15 @@ private void Reset()
         txtRemarks = new javax.swing.JTextArea();
         txtRoomNo = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        txtDischargeDate = new javax.swing.JFormattedTextField();
         jLabel36 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        txtDischargeDate = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         btnNew = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnGetData = new javax.swing.JButton();
-        txtDischargeID = new javax.swing.JTextField();
-        txtAdmitID = new javax.swing.JTextField();
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Patient Discharge Info"));
 
@@ -114,7 +110,7 @@ private void Reset()
 
         jLabel29.setText("Gender");
 
-        jLabel30.setText("(DD/MM/YYYY)");
+        jLabel30.setText("(YYYY-MM-DD)");
 
         txtGender.setEditable(false);
 
@@ -144,9 +140,7 @@ private void Reset()
 
         jLabel7.setText("Discharge Date");
 
-        txtDischargeDate.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
-
-        jLabel36.setText("(DD/MM/YYYY)");
+        jLabel36.setText("(YYYY-MM-DD)");
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jButton1.setText(">");
@@ -244,9 +238,9 @@ private void Reset()
                     .addComponent(txtDoctorName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtDischargeDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel36)
-                    .addComponent(jLabel7))
+                    .addComponent(jLabel7)
+                    .addComponent(txtDischargeDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -331,13 +325,8 @@ private void Reset()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtDischargeID)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 30, Short.MAX_VALUE))
-                    .addComponent(txtAdmitID))
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -348,11 +337,7 @@ private void Reset()
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtDischargeID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtAdmitID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -414,14 +399,14 @@ private void Reset()
             }
             Statement stmt;
             stmt= con.createStatement();
-            String sql1="Select AdmitID from DischargePatient_Room where AdmitID= " + txtAdmitID.getText() + "";
+            String sql1="Select AdmitID from DischargePatient_Room where AdmitID= " + PatientID.getText() + "";
             rs=stmt.executeQuery(sql1);
             if(rs.next()){
                 JOptionPane.showMessageDialog( this, "Record already exists");
                 return;
             }
 
-            String sql= "insert into DischargePatient_Room(AdmitID,DischargeDate,DP_Remarks)values("+ txtAdmitID.getText() + ",'"+ txtDischargeDate.getText() + "','"+ txtRemarks.getText() + "')";
+            String sql= "insert into DischargePatient_Room(AdmitID,DischargeDate,DP_Remarks)values("+ PatientID.getText() + ",'"+ txtDischargeDate.getText() + "','"+ txtRemarks.getText() + "')";
 
             pst=con.prepareStatement(sql);
             pst.execute();
@@ -442,7 +427,7 @@ private void Reset()
             if (P==0)
             {
                 con=Connect.ConnectDB();
-                String sql= "delete from DischargePatient_Room where AdmitID = " + txtDischargeID.getText() + "";
+                String sql= "delete from DischargePatient_Room where AdmitID = " + PatientID.getText() + "";
                 pst=con.prepareStatement(sql);
                 pst.execute();
                 JOptionPane.showMessageDialog(this,"Successfully deleted");
@@ -458,7 +443,7 @@ private void Reset()
         try{
             con=Connect.ConnectDB();
 
-            String sql= "update DischargePatient_Room set AdmitID="+ txtAdmitID.getText() + ",DischargeDate='"+ txtDischargeDate.getText() + "',DP_Remarks='"+ txtRemarks.getText() + "' where ID= " + txtDischargeID.getText() + "";
+            String sql= "update DischargePatient_Room set AdmitID="+ PatientID.getText() + ",DischargeDate='"+ txtDischargeDate.getText() + "',DP_Remarks='"+ txtRemarks.getText() + "' where AdmitID= " + PatientID.getText() + "";
             pst=con.prepareStatement(sql);
             pst.execute();
             JOptionPane.showMessageDialog(this,"Successfully updated");
@@ -535,10 +520,8 @@ private void Reset()
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane3;
     public javax.swing.JFormattedTextField txtAdmitDate;
-    public javax.swing.JTextField txtAdmitID;
     public javax.swing.JTextField txtBloodGroup;
-    public javax.swing.JFormattedTextField txtDischargeDate;
-    public javax.swing.JTextField txtDischargeID;
+    public javax.swing.JTextField txtDischargeDate;
     public javax.swing.JTextField txtDisease;
     public javax.swing.JTextField txtDoctorID;
     public javax.swing.JTextField txtDoctorName;
