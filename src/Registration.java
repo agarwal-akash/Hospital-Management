@@ -380,11 +380,9 @@ frm.setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_btnGetDataActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-try{
+        try{
             con=Connect.ConnectDB();
-          
             String sql= "update PatientRegistration set Patientname='"+ txtName.getText() + "',Fathername='"+ txtFname.getText() + "',Email='"+ txtEmail.getText() + "',ContactNo='"+ txtContact.getText() + "',Age=" + txtAge.getText() + ",Remarks='"+ txtInfo.getText() + "',Gen='" + cmbGender.getSelectedItem() + "',BG='"+ cmbBG.getSelectedItem() + "',Address='" + txtAdd.getText() + "' where PatientID='" + txtId.getText() + "'";
-
             pst=con.prepareStatement(sql);
             pst.execute();
             JOptionPane.showMessageDialog(this,"Successfully updated","Record",JOptionPane.INFORMATION_MESSAGE);

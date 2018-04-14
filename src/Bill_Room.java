@@ -583,7 +583,12 @@ public class Bill_Room extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        try{
+        if(PatientID.getText().equals("")){
+                JOptionPane.showMessageDialog(this,"Please Enter Patient data first!");
+        }
+        else{
+            try{
+            
             con=Connect.ConnectDB();
             int row= jTable1.getSelectedRow();
             String val =jTable1.getModel().getValueAt(row,2).toString();
@@ -596,9 +601,11 @@ public class Bill_Room extends javax.swing.JFrame {
 //            String moneyString = formatter.format((float)totalCharges);
             txtTotalCharges.setText(Integer.toString(totalCharges));
             
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(this,ex);
+            }catch(Exception ex){
+                JOptionPane.showMessageDialog(this,ex);
+            }
         }
+        
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
