@@ -39,7 +39,7 @@ public class About extends javax.swing.JFrame {
         jLabel1.setText("Hospital Management System");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel2.setText("by Akash Agarwal - 15GAE9002");
+        jLabel2.setText("by Akash Agarwal - 15GAEC9002");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("UVCE, 6 sem CSE");
