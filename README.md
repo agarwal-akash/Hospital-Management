@@ -8,7 +8,7 @@ A project made in class-12 (CBSE-Informatics and Practices).
 
 ## Getting started :computer:
 * To get the database first create a database in MySql
-and then put the [akash.sql](https://github.com/agarwal-akash/Hospital-Management/blob/master/akash.sql) dump file in your MyMySQL Server5.1/bin directory.
+and then put the [hp_mgmt_db.sql](https://github.com/agarwal-akash/Hospital-Management/blob/master/hp_mgmt_db.sql) dump file in your MyMySQL Server5.1/bin directory.
 Now in command prompt enter:
   * cd program files/MySQL/MySQL Server5.1/bin “press enter"
   * mysql –u root –p database_name < database_name.sql “press enter”
