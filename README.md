@@ -6,6 +6,13 @@ A project made in class-12 (CBSE-Informatics and Practices).
 * Sleek interface
 * Record of Patients,Doctors and additional facilities such as rooms and billing.
 
+## Screenshots
+![alt text](screenshots/doctor.jpg "Doctor")
+![alt text](screenshots/patient.jpg "Patien")
+![alt text](screenshots/patient_admit.jpg "Patien Admit")
+![alt text](screenshots/room_add.jpg "Add Room")
+![alt text](screenshots/welcome_screen.jpg "Welcome Screen")
+
 ## Getting started :computer:
 * To get the database first create a database in MySql
 and then put the [hp_mgmt_db.sql](https://github.com/agarwal-akash/Hospital-Management/blob/master/hp_mgmt_db.sql) dump file in your MyMySQL Server5.1/bin directory.
