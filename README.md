@@ -1,6 +1,6 @@
 # Hospital Management System  ![AUR](https://img.shields.io/badge/build-passing-brightgreen.svg) ![AUR](https://img.shields.io/badge/BUILT%20WITH-Netbeans-blue.svg)
 A desktop application written in Java for a Hospital Management System. 
-A project made in class-12 (CBSE-Informatics and Practices). 
+This project was made in class-12 (CBSE-Informatics and Practices). 
 * Provides password protected Admin panel.
 * MySql for backend
 * Sleek interface
@@ -15,9 +15,9 @@ A project made in class-12 (CBSE-Informatics and Practices).
 
 ## Getting started :computer:
 * To get the database first create a database in MySql
-and then put the [hp_mgmt_db.sql](https://github.com/agarwal-akash/Hospital-Management/blob/master/hp_mgmt_db.sql) dump file in your MyMySQL Server5.1/bin directory.
+and then put the [hp_mgmt_db.sql](https://github.com/agarwal-akash/Hospital-Management/blob/master/hp_mgmt_db.sql) dump file in your <mark>MyMySQL Server5.1/bin</mark> directory.
 Now in command prompt enter:
-  * cd program files/MySQL/MySQL Server5.1/bin “press enter"
+  * cd <mark>Program Files/MySQL/MySQL Server5.1/bin</mark> “press enter"
   * mysql –u root –p database_name < database_name.sql “press enter”
   
   This will complete the database transfer to your computer.
